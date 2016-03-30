@@ -2,12 +2,17 @@
 
 namespace SocialiteProviders\Etsy;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Laravel\Socialite\Contracts\Provider as ProviderContract;
-use Laravel\Socialite\One\AbstractProvider;
+use SocialiteProviders\Manager\OAuth1\AbstractProvider;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class EtsyAbstractProvider extends AbstractProvider implements ProviderContract
 {
+    /**
+     * Unique Provider Identifier.
+     */
+    const IDENTIFIER = 'ETSY';
+
     /**
      * Redirect the user to the authentication page for the provider.
      *
@@ -41,13 +46,11 @@ abstract class EtsyAbstractProvider extends AbstractProvider implements Provider
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
         } else {
-
             $temp = unserialize($_COOKIE['oauth_temp']);
 
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
-
         }
     }
 

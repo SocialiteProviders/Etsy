@@ -2,13 +2,17 @@
 
 namespace SocialiteProviders\Etsy;
 
-use Laravel\Socialite\One\User;
-use SocialiteProviders\Etsy\EtsyAbstractProvider;
+use SocialiteProviders\Manager\OAuth1\User;
 
 class Provider extends EtsyAbstractProvider
 {
     /**
-     * {@inheritDoc}
+     * Unique Provider Identifier.
+     */
+    const IDENTIFIER = 'ETSY';
+
+    /**
+     * {@inheritdoc}
      */
     public function user()
     {
