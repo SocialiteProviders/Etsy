@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\Etsy;
 
+use SocialiteProviders\Manager\OAuth1\AbstractProvider;
 use SocialiteProviders\Manager\OAuth1\User;
 
 class Provider extends EtsyAbstractProvider
@@ -14,20 +15,14 @@ class Provider extends EtsyAbstractProvider
     /**
      * {@inheritdoc}
      */
-    public function user()
+    protected function mapUserToObject(array $user)
     {
-        if (!$this->hasNecessaryVerifier()) {
-            throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
-        }
-
-        $user = $this->server->getUserDetails($token = $this->getToken());
-
         return (new User())->map([
-             'id' => $user->id,
-             'nickname' => $user->nickname,
-             'name' => $user->name,
-             'email' => $user->email,
-             'avatar' => $user->avatar,
-        ])->setToken($token->getIdentifier(), $token->getSecret());
+             'id' => $user['id'],
+             'nickname' => $user['nickname'],
+             'name' => $user['name'],
+             'email' => $user['email'],
+             'avatar' => $user['avatar'],
+        ]);
     }
 }
