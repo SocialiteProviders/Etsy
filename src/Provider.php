@@ -5,7 +5,7 @@ namespace SocialiteProviders\Etsy;
 use SocialiteProviders\Manager\OAuth1\AbstractProvider;
 use SocialiteProviders\Manager\OAuth1\User;
 
-class Provider extends EtsyAbstractProvider
+class Provider extends AbstractProvider
 {
     /**
      * Unique Provider Identifier.
